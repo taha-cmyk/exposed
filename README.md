@@ -34,7 +34,7 @@ fun CodeEditor() {
         languageSyntax = KotlinSyntax()  // Or any other language implementation
     )
 }
-
+```
 ## Adding a New Language
 
 To add support for a new programming language, create a new class that extends `BaseLanguageSyntax`. Here's a step-by-step guide:
@@ -183,7 +183,7 @@ fun PreviewNewLanguage() {
 - Consider using lazy matching where appropriate
 
 ## License
-
+MIT
 
 
 
