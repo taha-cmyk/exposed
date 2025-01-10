@@ -14,8 +14,8 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 - ⚡ Real-time highlighting
 - 📱 Mobile-friendly
 
-![image](docs/s1.png)
-![image](docs/s2.png)
+![image](./docs/s1.png)
+![image](./docs/s2.png)
 
 ## Getting Started
 
@@ -189,5 +189,4 @@ fun PreviewNewLanguage() {
 ---
 
 We welcome contributions! If you've created a syntax highlighter for a new language, please share it with the community by submitting a pull request.
-```
 
