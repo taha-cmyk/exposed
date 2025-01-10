@@ -1,6 +1,7 @@
 Here's a comprehensive README.md for your syntax highlighting library:
 
-```markdown
+
+
 # Compose Code Syntax Highlighter
 
 A flexible and extensible syntax highlighting library for Jetpack Compose text fields. This library allows easy addition of new programming languages and custom themes.
@@ -14,8 +15,9 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 - ⚡ Real-time highlighting
 - 📱 Mobile-friendly
 
-![image](./docs/s1.png)
-![image](./docs/s2.png)
+![image](/docs/s1.png)
+![image](/docs/s2.png)
+
 
 ## Getting Started
 
@@ -32,7 +34,6 @@ fun CodeEditor() {
         languageSyntax = KotlinSyntax()  // Or any other language implementation
     )
 }
-```
 
 ## Adding a New Language
 
