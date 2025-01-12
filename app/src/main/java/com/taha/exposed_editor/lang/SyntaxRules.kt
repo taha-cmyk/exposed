@@ -14,6 +14,7 @@ data class SyntaxRule(
 interface LanguageSyntax {
     val rules: List<SyntaxRule>
     val languageName: String
+    val theme : SyntaxTheme
 }
 
 abstract class BaseLanguageSyntax : LanguageSyntax {

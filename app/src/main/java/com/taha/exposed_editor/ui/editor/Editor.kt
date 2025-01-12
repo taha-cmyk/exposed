@@ -63,7 +63,7 @@ fun SyntaxHighlightedTextField(
         decorationBox = { innerTextField ->
             Row(
                 Modifier
-                    .background(backgroundColor, RoundedCornerShape(percent = 0))
+                    .background(backgroundColor, RoundedCornerShape(percent = 0)).fillMaxSize()
             ) {
                 innerTextField()
             }

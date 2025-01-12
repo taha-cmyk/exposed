@@ -4,9 +4,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import com.taha.exposed_editor.lang.BaseLanguageSyntax
 import com.taha.exposed_editor.lang.SyntaxRule
+import com.taha.exposed_editor.lang.SyntaxTheme
 
 
-class KotlinSyntax : BaseLanguageSyntax() {
+class KotlinSyntax(override val theme: SyntaxTheme) : BaseLanguageSyntax() {
     override val languageName: String = "Kotlin"
 
     override val rules: List<SyntaxRule> = listOf(
