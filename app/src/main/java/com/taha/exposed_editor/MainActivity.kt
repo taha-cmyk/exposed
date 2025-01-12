@@ -153,7 +153,7 @@ fun App() {
         commentColor = Color(0xFF6A9955),    // Color for comments
         defaultTextColor = Color(0xFFD4D4D4)  // Default text color
     )
-    CodeEditor(PythonSyntax(customTheme))
+    CodeEditor(KotlinSyntax(customTheme))
 }
 
 
