@@ -1,6 +1,3 @@
-Here's a comprehensive README.md for your syntax highlighting library:
-
-
 
 # Compose Code Syntax Highlighter
 
