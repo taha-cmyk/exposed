@@ -13,7 +13,6 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 - 📱 Mobile-friendly
 
 ![image](/docs/s1.png)
-![image](/docs/s2.png)
 
 
 ## Getting Started
@@ -21,96 +20,70 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 ### Basic Usage
 
 ```kotlin
-@Composable
-fun CodeEditor() {
-    var code by remember { mutableStateOf("") }
-    
-    SyntaxHighlightedTextField(
-        value = code,
-        onValueChange = { code = it },
-        languageSyntax = KotlinSyntax()  // Or any other language implementation
-    )
-}
+val theme = KotlinDefaultTheme()
+
+SyntaxHighlightedTextField(
+   theme = theme,
+   code = """
+            fun main() {
+                val message = "Hello, World!" // This is a comment
+                println(message)
+            }
+        """.trimIndent()
+)
 ```
-## Adding a New Language
-
-To add support for a new programming language, create a new class that extends `BaseLanguageSyntax`. Here's a step-by-step guide:
-
-1. Create a new Kotlin file for your language (e.g., `RubySyntax.kt`)
-2. Extend the `BaseLanguageSyntax` class
-3. Override the required properties
-4. Define your syntax rules
 
 ### Template for New Language
 
 ```kotlin
-class NewLanguageSyntax : BaseLanguageSyntax() {
-    override val languageName: String = "YourLanguageName"
-    
-    override val rules: List<SyntaxRule> = listOf(
-        // Keywords
-        *createKeywordRules(
-            listOf(
-                "keyword1", "keyword2", "keyword3"
-                // Add your language keywords here
-            ),
-            SpanStyle(color = Color.Blue)  // Define keyword style
-        ).toTypedArray(),
-        
-        // Numbers
-        SyntaxRule(
-            pattern = Regex("\\b\\d+(\\.\\d+)?\\b"),
-            style = SpanStyle(color = Color.Magenta)
-        ),
-        
-        // Add more rules for your language
-    )
+
+fun getKotlinSyntaxPatterns(theme: SyntaxHighlightingTheme): List<SyntaxPattern> {
+   return listOf(
+       // your syntax patterns here
+       // eg : 
+        SyntaxPattern(Regex("\\b(fun|val|var)\\b"), theme.getKeywordStyle()),
+   )
 }
 ```
 
-### Syntax Rule Components
-
-Each `SyntaxRule` consists of two main components:
-
-1. **Pattern**: A Regex pattern to match specific code elements
-2. **Style**: A `SpanStyle` defining how the matched text should be displayed
-
-### Common Regex Patterns
-
-Here are some commonly used regex patterns for syntax highlighting:
+### implement SyntaxHighlightingTheme Interface for new language theme
 
 ```kotlin
-// Numbers
-Regex("\\b\\d+(\\.\\d+)?\\b")  // Matches integers and decimals
+class KotlinDefaultTheme : SyntaxHighlightingTheme {
+   override fun getKeywordStyle() = TextStyle(color = Color(0xFFFF5733), fontWeight = FontWeight.Bold)
+   override fun getStringStyle() = TextStyle(color = Color(0xFF33FF57))
+   override fun getCommentStyle() = TextStyle(color = Color(0xFF888888), fontWeight = FontWeight.Light)
+   override fun getNumbersStyle(): TextStyle = TextStyle(color = Color(0xFF33FF57))
+   override fun getDefaultTextStyle(): TextStyle = TextStyle(color = Color(0xFFFFFFFF))
 
-// String literals
-Regex("\"[^\"]*\"")            // Matches "double-quoted strings"
-Regex("'[^']*'")               // Matches 'single-quoted strings'
+   private val languageSpecificStyles: Map<String, TextStyle> = mapOf(
+      "kotlin_class" to TextStyle(color = Color(0xFFA9E2F3), fontWeight = FontWeight.Bold),
+      "kotlin_function" to TextStyle(color = Color(0xFFF781F3)),
+      "kotlin_property" to TextStyle(color = Color(0xFF81F7F3)),
+      "kotlin_annotation" to TextStyle(color = Color(0xFFF5DA81), fontWeight = FontWeight.Bold),
+      "kotlin_type" to TextStyle(color = Color(0xFFA9F5A9), fontWeight = FontWeight.Bold),
+      "kotlin_constant" to TextStyle(color = Color(0xFFF5A9D0), fontWeight = FontWeight.Bold),
+      "kotlin_string" to TextStyle(color = Color(0xFFE6CEAC)),
+      "kotlin_number" to TextStyle(color = Color(0xFFBDBDBD)),
+      "kotlin_comment" to TextStyle(color = Color(0xFF999999), fontStyle = FontStyle.Italic),
+      "kotlin_keyword" to TextStyle(color = Color(0xFFB57d00), fontWeight = FontWeight.Bold),
+      "kotlin_operator" to TextStyle(color = Color.Magenta),
+      "kotlin_separator" to TextStyle(color = Color.DarkGray),
+      "kotlin_bracket" to TextStyle(color = Color.DarkGray),
+      "kotlin_parenthesis" to TextStyle(color = Color.DarkGray),
+      "kotlin_brace" to TextStyle(color = Color.DarkGray),
+      "kotlin_parameter" to TextStyle(color = Color(0xFFFD971F)),
+      "kotlin_local_variable" to TextStyle(color = Color(0xFF96CBFE)),
+      "kotlin_global_variable" to TextStyle(color = Color(0xFF66D9EF)),
 
-// Comments
-Regex("//.*")                  // Matches single-line comments
-Regex("/\\*[\\s\\S]*?\\*/")    // Matches multi-line comments
+      )
 
-// Function declarations
-Regex("\\b\\w+\\s*\\(")        // Matches function calls
-
-// Variables
-Regex("\\b[a-zA-Z_]\\w*\\b")   // Matches variable names
+   override fun getLanguageSpecificStyle(tokenType: String): TextStyle {
+      return languageSpecificStyles[tokenType] ?: TextStyle(color = Color(0xFFFFFFFF))
+   }
+}
 ```
 
-## Creating Custom Themes
-
-You can create custom themes by defining a new `SyntaxTheme`:
-
-```kotlin
-val customTheme = SyntaxTheme(
-    keywordColor = Color(0xFF569CD6),    // Color for keywords
-    numberColor = Color(0xFFB5CEA8),     // Color for numbers
-    stringColor = Color(0xFFCE9178),     // Color for strings
-    commentColor = Color(0xFF6A9955),    // Color for comments
-    defaultTextColor = Color(0xFFD4D4D4)  // Default text color
-)
-```
 
 ## Best Practices
 
@@ -151,19 +124,18 @@ val customTheme = SyntaxTheme(
 ```kotlin
 @Preview
 @Composable
-fun PreviewNewLanguage() {
-    var code by remember { mutableStateOf(
-        """
-        // Add sample code in your language here
-        // This will help test syntax highlighting
-        """
-    ) }
-    
-    SyntaxHighlightedTextField(
-        value = code,
-        onValueChange = { code = it },
-        languageSyntax = YourNewLanguageSyntax()
-    )
+fun PreviewHighlightedCodeEditor() {
+   val theme = KotlinDefaultTheme()
+
+   SyntaxHighlightedTextField(
+      theme = theme,
+      code = """
+            fun main() {
+                val message = "Hello, World!" // This is a comment
+                println(message)
+            }
+        """.trimIndent()
+   )
 }
 ```
 

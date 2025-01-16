@@ -1,56 +1,60 @@
 package com.taha.exposed_editor.lang
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.TextStyle
+import com.taha.exposed_editor.lang.kotlin.getKotlinSyntaxPatterns
 
 
-data class SyntaxRule(
-    val pattern: Regex,
-    val style: SpanStyle
-)
+data class SyntaxPattern(val regex: Regex, val style: TextStyle)
 
-interface LanguageSyntax {
-    val rules: List<SyntaxRule>
-    val languageName: String
-    val theme : SyntaxTheme
+interface SyntaxHighlightingTheme {
+    fun getKeywordStyle(): TextStyle
+    fun getStringStyle(): TextStyle
+    fun getCommentStyle(): TextStyle
+    fun getNumbersStyle(): TextStyle
+    fun getDefaultTextStyle(): TextStyle
+
+    fun getLanguageSpecificStyle(tokenType: String): TextStyle
 }
 
-abstract class BaseLanguageSyntax : LanguageSyntax {
-    protected fun createKeywordRules(keywords: List<String>, style: SpanStyle): List<SyntaxRule> {
-        return keywords.map { keyword ->
-            SyntaxRule(Regex("\\b$keyword\\b"), style)
-        }
-    }
-}
 
-class SyntaxHighlighter(private val languageSyntax: LanguageSyntax) {
-    fun highlight(text: String): AnnotatedString = buildAnnotatedString {
-        append(text)
+fun buildHighlightedCode(
+    code: String,
+    theme: SyntaxHighlightingTheme
+): AnnotatedString {
+    val patterns = getKotlinSyntaxPatterns(theme)
+    val builder = AnnotatedString.Builder()
+    var currentIndex = 0
 
-        languageSyntax.rules.forEach { rule ->
-            rule.pattern.findAll(text).forEach { match ->
-                addStyle(
-                    rule.style,
-                    match.range.first,
-                    match.range.last + 1
-                )
+    while (currentIndex < code.length) {
+        var matchFound = false
+
+        // Apply the first matching pattern
+        for (pattern in patterns) {
+            val match = pattern.regex.find(code, currentIndex)
+            if (match != null && match.range.first == currentIndex) {
+                builder.pushStyle(pattern.style.toSpanStyle())
+                builder.append(match.value)
+                builder.pop()
+                currentIndex += match.value.length
+                matchFound = true
+                break
             }
         }
+
+        // If no match, append the character as plain text
+        if (!matchFound) {
+            builder.append(code[currentIndex])
+            currentIndex++
+        }
     }
+
+    return builder.toAnnotatedString()
 }
 
-fun AnnotatedString.highlightSyntax(languageSyntax: LanguageSyntax): AnnotatedString {
-    return SyntaxHighlighter(languageSyntax).highlight(this.toString())
-}
 
 
-data class SyntaxTheme(
-    val keywordColor: Color,
-    val numberColor: Color,
-    val stringColor: Color,
-    val commentColor: Color,
-    val defaultTextColor: Color
-)
+
+
+
 
