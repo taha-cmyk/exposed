@@ -13,6 +13,8 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 - 📱 Mobile-friendly
 
 ![image](/docs/s1.png)
+![image](/docs/s2.png)
+
 
 
 ## Getting Started
