@@ -2,7 +2,6 @@ package com.taha.exposed_editor.lang
 
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import com.taha.exposed_editor.lang.kotlin.getKotlinSyntaxPatterns
 
 
 data class SyntaxPattern(val regex: Regex, val style: TextStyle)
@@ -20,9 +19,9 @@ interface SyntaxHighlightingTheme {
 
 fun buildHighlightedCode(
     code: String,
-    theme: SyntaxHighlightingTheme
+    patterns: List<SyntaxPattern>
 ): AnnotatedString {
-    val patterns = getKotlinSyntaxPatterns(theme)
+
     val builder = AnnotatedString.Builder()
     var currentIndex = 0
 

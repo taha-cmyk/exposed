@@ -7,7 +7,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.taha.exposed_editor.lang.kotlin.KotlinDefaultTheme
+import com.taha.exposed_editor.lang.ruby.RubyThemes
+import com.taha.exposed_editor.lang.ruby.dark.RubyDarkTheme
+import com.taha.exposed_editor.lang.ruby.getRubySyntaxPatterns
+import com.taha.exposed_editor.lang.ruby.getRubyTheme
+import com.taha.exposed_editor.lang.syntax_provider.Language
+import com.taha.exposed_editor.lang.syntax_provider.SyntaxProvider
 import com.taha.exposed_editor.ui.editor.SyntaxHighlightedTextField
 import com.taha.exposed_editor.ui.theme.Theme
 
@@ -17,16 +22,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             Theme {
             Surface(color = MaterialTheme.colorScheme.surface) {
-                val theme = KotlinDefaultTheme()
+                val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY,getRubyTheme(RubyThemes.DEFAULT))
 
                 SyntaxHighlightedTextField(
-                    code = """
-                        fun main() {
-                            val message = "Hello, World!" // This is a comment
-                            println(message)
-                        }
+                    code = """                                 
                     """.trimIndent(),
-                    theme = theme,
+                    patterns = patterns
                 )
                 }
             }
@@ -38,15 +39,26 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun PreviewHighlightedCodeEditor() {
-    val theme = KotlinDefaultTheme()
+    val theme = RubyDarkTheme()
 
     SyntaxHighlightedTextField(
         code = """
-            fun main() {
-                val message = "Hello, World!" // This is a comment
-                println(message)
-            }
+            class Integer
+              def to_eng
+                if self == 5
+                  english = 'five'
+                else
+                  english = 'fifty-eight'
+                end
+            
+                english
+              end
+            end
+
+            # I'd better test on a couple of numbers...
+            puts 5.to_eng
+            puts 58.to_eng
         """.trimIndent(),
-        theme = theme,
+        patterns = getRubySyntaxPatterns(theme)
     )
 }
