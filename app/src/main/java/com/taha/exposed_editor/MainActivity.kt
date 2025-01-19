@@ -39,26 +39,28 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun PreviewHighlightedCodeEditor() {
-    val theme = RubyDarkTheme()
+    val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY,getRubyTheme(RubyThemes.DEFAULT))
 
     SyntaxHighlightedTextField(
         code = """
-            class Integer
-              def to_eng
-                if self == 5
-                  english = 'five'
-                else
-                  english = 'fifty-eight'
-                end
-            
-                english
-              end
-            end
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
 
-            # I'd better test on a couple of numbers...
-            puts 5.to_eng
-            puts 58.to_eng
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+
+# Create a new object
+g = Greeter.new("world")
+
+# Output "Hello World!"
+g.salute
         """.trimIndent(),
-        patterns = getRubySyntaxPatterns(theme)
+        patterns = patterns
     )
+    }
 }
