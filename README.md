@@ -124,18 +124,32 @@ class KotlinDefaultTheme : SyntaxHighlightingTheme {
 @Preview
 @Composable
 fun PreviewHighlightedCodeEditor() {
-   val theme = KotlinDefaultTheme()
+    val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY,getRubyTheme(RubyThemes.DEFAULT))
 
-   SyntaxHighlightedTextField(
-      theme = theme,
-      code = """
-            fun main() {
-                val message = "Hello, World!" // This is a comment
-                println(message)
-            }
-        """.trimIndent()
-   )
+    SyntaxHighlightedTextField(
+        code = """
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+
+# Create a new object
+g = Greeter.new("world")
+
+# Output "Hello World!"
+g.salute
+        """.trimIndent(),
+        patterns = patterns
+    )
+    }
 }
+
 ```
 
 ## Common Issues and Solutions
