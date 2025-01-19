@@ -22,17 +22,14 @@ A flexible and extensible syntax highlighting library for Jetpack Compose text f
 ### Basic Usage
 
 ```kotlin
-val theme = KotlinDefaultTheme()
+ val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY,getRubyTheme(RubyThemes.DEFAULT))
 
-SyntaxHighlightedTextField(
-   theme = theme,
-   code = """
-            fun main() {
-                val message = "Hello, World!" // This is a comment
-                println(message)
-            }
-        """.trimIndent()
-)
+ SyntaxHighlightedTextField(
+     code = """                                 
+     """.trimIndent(),
+     patterns = patterns
+ )
+ }
 ```
 
 ### Template for New Language
