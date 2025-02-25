@@ -1,68 +1,106 @@
-# Syntax Provider Documentation
+# SyntaxProvider Documentation
+================================
 
 ## Overview
+--------
 
-The Syntax Provider is a utility object that provides syntax highlighting patterns and default themes for various programming languages. It supports four languages: Kotlin, Python, Ruby, and JavaScript.
+The `SyntaxProvider` object is a utility class that provides methods for retrieving syntax patterns and default themes for various programming languages. It supports Kotlin, Python, Ruby, and JavaScript languages.
 
 ## Function Descriptions
+----------------------
 
-### `getSyntaxPatterns(language: Language, theme: SyntaxHighlightingTheme): List<SyntaxPattern>`
-
-This function returns a list of syntax patterns for a given language and theme. It uses a when-expression to determine which language-specific function to call.
+### `getSyntaxPatterns(language: Language, theme: SyntaxHighlightingTheme)`
+#### Description
+Retrieves a list of syntax patterns for the specified language and theme.
 
 #### Parameters
+- `language` (Language): The programming language for which to retrieve syntax patterns.
+- `theme` (SyntaxHighlightingTheme): The theme to apply to the syntax patterns.
 
-* `language`: The language for which to retrieve syntax patterns.
-* `theme`: The theme to apply to the syntax patterns.
-
-#### Return Value
-
+#### Returns
 A list of `SyntaxPattern` objects for the specified language and theme.
 
-### `getDefaultTheme(language: Language): SyntaxHighlightingTheme`
+#### Throws
+None
 
-This function returns the default theme for a given language. It uses a when-expression to determine which language-specific theme to return.
+#### Example
+```kotlin
+val kotlinSyntaxPatterns = SyntaxProvider.getSyntaxPatterns(Language.KOTLIN, KotlinDefaultTheme())
+```
+
+### `getDefaultTheme(language: Language)`
+#### Description
+Retrieves the default theme for the specified language.
 
 #### Parameters
+- `language` (Language): The programming language for which to retrieve the default theme.
 
-* `language`: The language for which to retrieve the default theme.
-
-#### Return Value
-
+#### Returns
 A `SyntaxHighlightingTheme` object representing the default theme for the specified language.
 
-## Enum Description
+#### Throws
+None
+
+#### Example
+```kotlin
+val kotlinDefaultTheme = SyntaxProvider.getDefaultTheme(Language.KOTLIN)
+```
+
+## API Reference
+-----------------
+
+### `getSyntaxPatterns(language: Language, theme: SyntaxHighlightingTheme)`
+
+**Description**: Retrieves a list of syntax patterns for the specified language and theme.
+
+**Parameters**:
+- `language` (Language): The programming language for which to retrieve syntax patterns.
+- `theme` (SyntaxHighlightingTheme): The theme to apply to the syntax patterns.
+
+**Returns**: A list of `SyntaxPattern` objects for the specified language and theme.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val kotlinSyntaxPatterns = SyntaxProvider.getSyntaxPatterns(Language.KOTLIN, KotlinDefaultTheme())
+```
+
+### `getDefaultTheme(language: Language)`
+
+**Description**: Retrieves the default theme for the specified language.
+
+**Parameters**:
+- `language` (Language): The programming language for which to retrieve the default theme.
+
+**Returns**: A `SyntaxHighlightingTheme` object representing the default theme for the specified language.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val kotlinDefaultTheme = SyntaxProvider.getDefaultTheme(Language.KOTLIN)
+```
 
 ### `enum class Language`
 
-This enum class represents the supported programming languages.
+**Description**: An enumeration of supported programming languages.
 
-#### Values
+**Values**:
+- `KOTLIN`
+- `PYTHON`
+- `RUBY`
+- `JAVASCRIPT`
 
-* `KOTLIN`
-* `PYTHON`
-* `RUBY`
-* `JAVASCRIPT`
-
-## Usage Examples
-
-### Retrieving Syntax Patterns
+### Usage Examples
+-----------------
 
 ```kotlin
+// Retrieve syntax patterns for Kotlin with the default theme
 val kotlinSyntaxPatterns = SyntaxProvider.getSyntaxPatterns(Language.KOTLIN, KotlinDefaultTheme())
-val pythonSyntaxPatterns = SyntaxProvider.getSyntaxPatterns(Language.PYTHON, PythonDefaultTheme())
+
+// Retrieve the default theme for Python
+val pythonDefaultTheme = SyntaxProvider.getDefaultTheme(Language.PYTHON)
 ```
 
-### Retrieving Default Themes
-
-```kotlin
-val kotlinDefaultTheme = SyntaxProvider.getDefaultTheme(Language.KOTLIN)
-val rubyDefaultTheme = SyntaxProvider.getDefaultTheme(Language.RUBY)
-```
-
-### Using the `Language` Enum
-
-```kotlin
-val language = Language.JAVASCRIPT
-val syntaxPatterns = SyntaxProvider.getSyntaxPatterns(language, JavaScriptDefaultTheme())
-```
+Note: This documentation assumes that the reader is familiar with the Kotlin programming language and the concepts of syntax highlighting and themes.
