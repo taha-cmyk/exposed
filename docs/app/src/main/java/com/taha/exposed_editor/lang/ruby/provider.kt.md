@@ -1,56 +1,69 @@
-**Ruby Themes Documentation**
-================================
+Ruby Theme Provider Documentation
+=====================================
 
-### Overview
+Overview
+--------
 
-This module provides a set of predefined themes for syntax highlighting in Ruby programming language. It allows users to easily switch between different themes, currently supporting a default light theme and a dark theme.
+This is a Ruby theme provider module that provides different syntax highlighting themes for the Ruby programming language. It currently supports two themes: a default light theme and a dark theme.
 
-### Enum Class: RubyThemes
----------------------------
+Function Descriptions
+--------------------
 
-#### Description
+### `getRubyTheme(theme: RubyThemes)`
 
-An enumeration of available Ruby themes.
+**Description**: Returns a syntax highlighting theme for the Ruby programming language based on the provided theme type.
 
-#### Values
+**Parameters**:
+- `theme` (RubyThemes): The type of theme to return.
 
-* `DEFAULT`: The default light theme.
-* `DARK`: The dark theme.
+**Returns**: A `SyntaxHighlightingTheme` object representing the chosen theme.
 
-### Function: getRubyTheme
----------------------------
+**Throws**: None
 
-#### Description
-
-Returns the corresponding `SyntaxHighlightingTheme` object for the given `RubyThemes` enum value.
-
-#### Parameters
-
-* `theme`: The desired Ruby theme, represented as a `RubyThemes` enum value.
-
-#### Return Value
-
-The `SyntaxHighlightingTheme` object associated with the given theme.
-
-#### Usage Examples
-
+**Example**:
 ```kotlin
-// Get the default Ruby theme
-val defaultTheme: SyntaxHighlightingTheme = getRubyTheme(RubyThemes.DEFAULT)
-
-// Get the dark Ruby theme
-val darkTheme: SyntaxHighlightingTheme = getRubyTheme(RubyThemes.DARK)
+val defaultTheme = getRubyTheme(RubyThemes.DEFAULT)
+val darkTheme = getRubyTheme(RubyThemes.DARK)
 ```
 
-### Theme Classes
-------------------
+API Reference
+-------------
 
-#### RubyDefaultTheme
+### `RubyThemes`
 
-* A light-themed implementation of `SyntaxHighlightingTheme` for Ruby.
+**Description**: An enum class representing the different types of Ruby themes available.
 
-#### RubyDarkTheme
+**Values**:
+- `DEFAULT`: The default light theme.
+- `DARK`: The dark theme.
 
-* A dark-themed implementation of `SyntaxHighlightingTheme` for Ruby.
+### `getRubyTheme(theme: RubyThemes)`
 
-Note: The implementation details of these theme classes are not included in this documentation, as they are assumed to be provided separately.
+**Description**: Returns a syntax highlighting theme for the Ruby programming language based on the provided theme type.
+
+**Parameters**:
+- `theme` (RubyThemes): The type of theme to return.
+
+**Returns**: A `SyntaxHighlightingTheme` object representing the chosen theme.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val defaultTheme = getRubyTheme(RubyThemes.DEFAULT)
+val darkTheme = getRubyTheme(RubyThemes.DARK)
+```
+
+Usage Examples
+-------------
+
+To use this module, simply call the `getRubyTheme` function with the desired theme type:
+```kotlin
+val theme = getRubyTheme(RubyThemes.DEFAULT)
+// Use the theme object to apply syntax highlighting
+```
+You can also switch between themes by changing the `theme` parameter:
+```kotlin
+val theme = getRubyTheme(RubyThemes.DARK)
+// Use the dark theme object to apply syntax highlighting
+```
