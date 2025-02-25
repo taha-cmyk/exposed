@@ -1,90 +1,57 @@
-Kotlin Themes
-================
+Kotlin Theme Provider
+======================
 
 Overview
 --------
 
-This Kotlin package provides functionality for selecting and retrieving themes for a Kotlin editor. The themes are defined by the `KotlinThemes` enum class and retrieved using the `getKotlinTheme` function.
+This module provides a theme provider for Kotlin language. It allows users to select from a variety of themes and returns the corresponding theme object.
 
-Enum Classes
-------------
+API Reference
+-------------
 
-### KotlinThemes
+### `getKotlinTheme(theme: KotlinThemes)`
 
-```kotlin
-enum class KotlinThemes {
-    DEFAULT,
-    DRACULA
-}
+**Description**: Returns the Kotlin theme object based on the provided theme enum.
+
+**Parameters**:
+- `theme` (KotlinThemes): The enum value of the desired theme.
+
+**Returns**: The theme object corresponding to the provided theme enum. The type of the returned object depends on the theme enum value. For example, if the theme is `DEFAULT`, it returns a `KotlinDefaultTheme` object.
+
+**Throws**: `kotlin.NotImplementedError` if the theme is not yet implemented.
+
+**Example**:
+```EMPLARY
+val defaultTheme = getKotlinTheme(KotlinThemes.DEFAULT)
 ```
 
-This enum class defines the available themes for a Kotlin editor.
+### `enum class KotlinThemes`
 
-Functions
----------
+**Description**: Enum class representing the available Kotlin themes.
 
-### getKotlinTheme
+**Values**:
+- `DEFAULT`: The default Kotlin theme.
+- `DRACULA`: The Dracula theme (not yet implemented).
 
-```kotlin
-fun getKotlinTheme(theme: KotlinThemes)
-```
+### `KotlinDefaultTheme()`
 
-This function retrieves the theme object corresponding to the provided `KotlinThemes` enum value.
+**Description**: The default theme object for Kotlin language.
 
-#### Parameters
-
-* `theme`: The theme to retrieve, represented by a `KotlinThemes` enum value.
-
-#### Return Value
-
-* The theme object corresponding to the provided `theme` enum value.
-
-#### Note
-
-Currently, the function does not return any value. It is expected that the theme object will be returned in future implementations.
+**Returns**: A `KotlinDefaultTheme` object.
 
 Usage Examples
 -------------
 
-### Retrieving the Default Theme
-
 ```kotlin
+// Get the default Kotlin theme
 val defaultTheme = getKotlinTheme(KotlinThemes.DEFAULT)
-```
 
-This example retrieves the default theme object.
-
-### Retrieving the Dracula Theme
-
-```kotlin
-val draculaTheme = getKotlinTheme(KotlinThemes.DRACULA)
-```
-
-This example is currently not implemented, as the `getKotlinTheme` function does not support the `DRACULA` theme yet.
-
-Future Development
------------------
-
-To support additional themes, simply add more cases to the `when` statement in the `getKotlinTheme` function, following the existing pattern:
-
-```kotlin
-fun getKotlinTheme(theme: KotlinThemes) {
-    when (theme) {
-        KotlinThemes.DEFAULT -> KotlinDefaultTheme()
-        KotlinThemes.DRACULA -> KotlinDraculaTheme() // Implement the KotlinDraculaTheme class
-        // Add more themes here
-    }
+// Try to get the Dracula theme (will throw an error)
+try {
+    val draculaTheme = getKotlinTheme(KotlinThemes.DRACULA)
+} catch (e: NotImplementedError) {
+    println("Dracula theme is not yet implemented")
 }
 ```
 
-Similarly, to return the theme object, modify the `getKotlinTheme` function to return a value:
-
-```kotlin
-fun getKotlinTheme(theme: KotlinThemes): Any { // Replace Any with the actual theme class
-    when (theme) {
-        KotlinThemes.DEFAULT -> return KotlinDefaultTheme()
-        KotlinThemes.DRACULA -> return KotlinDraculaTheme() // Implement the KotlinDraculaTheme class
-        // Add more themes here
-    }
-}
-```
+Note: The `KotlinDefaultTheme` class is not shown in this documentation as it is assumed to be defined elsewhere in the codebase.
