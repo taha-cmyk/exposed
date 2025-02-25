@@ -1,78 +1,170 @@
-# JavaScript Syntax Highlighting
+**JavaScript Syntax Highlighting**
 =====================================
 
-## Overview
-------------
+Overview
+--------
 
-This module provides syntax highlighting for JavaScript code. It defines a set of patterns to match different syntax elements, such as keywords, strings, comments, and more. These patterns are used to apply different text styles to the matched elements, making it easier to read and understand the code.
+This module provides syntax highlighting for JavaScript code. It defines a set of syntax patterns and a default theme for highlighting JavaScript syntax.
 
-## Functions
--------------
+### `getJavaScriptSyntaxPatterns(theme)`
 
-### `getJavaScriptSyntaxPatterns(theme: SyntaxHighlightingTheme): List<SyntaxPattern>`
+**Description**: Returns a list of syntax patterns for JavaScript.
 
-Returns a list of syntax patterns for JavaScript code.
+**Parameters**:
 
-#### Parameters
+* `theme` (SyntaxHighlightingTheme): The theme to use for syntax highlighting.
 
-* `theme`: The syntax highlighting theme to use.
+**Returns**: A list of SyntaxPattern objects.
 
-#### Return Value
-
-A list of `SyntaxPattern` objects, where each pattern defines a regular expression to match a specific syntax element and the text style to apply to it.
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val syntaxPatterns = getJavaScriptSyntaxPatterns(theme)
+```
 
 ### `JavaScriptDefaultTheme`
 
-A default implementation of the `SyntaxHighlightingTheme` interface for JavaScript.
+**Description**: A default theme for JavaScript syntax highlighting.
 
-#### Methods
+**Properties**:
 
-* `getKeywordStyle()`: Returns the text style for keywords.
-* `getStringStyle()`: Returns the text style for strings.
-* `getCommentStyle()`: Returns the text style for comments.
-* `getNumbersStyle()`: Returns the text style for numbers.
+* `keywordStyle`: The style for keywords.
+* `stringStyle`: The style for strings.
+* `commentStyle`: The style for comments.
+* `numbersStyle`: The style for numbers.
+* `defaultTextStyle`: The default text style.
+* `languageSpecificStyles`: A map of language-specific styles.
+
+**Methods**:
+
+* `getKeywordStyle()`: Returns the style for keywords.
+* `getStringStyle()`: Returns the style for strings.
+* `getCommentStyle()`: Returns the style for comments.
+* `getNumbersStyle()`: Returns the style for numbers.
 * `getDefaultTextStyle()`: Returns the default text style.
-* `getLanguageSpecificStyle(tokenType: String)`: Returns the text style for a specific language element.
+* `getLanguageSpecificStyle(tokenType)`: Returns the language-specific style for the given token type.
 
-## Usage Examples
------------------
-
-### Creating a Custom Theme
-
-To create a custom theme, you can extend the `JavaScriptDefaultTheme` class and override its methods to return your own text styles.
+**Example**:
 ```kotlin
-class MyTheme : JavaScriptDefaultTheme() {
-    override fun getKeywordStyle() = TextStyle(color = Color(0xFF0000FF)) // Blue
-    override fun getStringStyle() = TextStyle(color = Color(0xFF008000)) // Green
-    // ...
-}
+val theme = JavaScriptDefaultTheme()
+val keywordStyle = theme.getKeywordStyle()
 ```
-### Applying Syntax Highlighting
 
-To apply syntax highlighting to your code, you can use the `getJavaScriptSyntaxPatterns` function and pass your custom theme as an argument.
+API Reference
+-------------
+
+### `getJavaScriptSyntaxPatterns(theme)`
+
+**Description**: Returns a list of syntax patterns for JavaScript.
+
+**Parameters**:
+
+* `theme` (SyntaxHighlightingTheme): The theme to use for syntax highlighting.
+
+**Returns**: A list of SyntaxPattern objects.
+
+**Throws**: None.
+
+**Example**:
 ```kotlin
-val theme = MyTheme()
-val patterns = getJavaScriptSyntaxPatterns(theme)
-// Use the patterns to highlight your code
+val theme = JavaScriptDefaultTheme()
+val syntaxPatterns = getJavaScriptSyntaxPatterns(theme)
 ```
-## Syntax Patterns
-------------------
 
-The following syntax patterns are defined for JavaScript:
+### `JavaScriptDefaultTheme.getKeywordStyle()`
 
-* Keywords: `function`, `let`, `const`, `var`, `if`, `else`, `for`, `while`, `do`, `switch`, `case`, `break`, `continue`, `return`, `try`, `catch`, `finally`, `throw`, `new`, `this`, `class`, `extends`, `super`, `import`, `export`, `default`, `typeof`, `instanceof`, `void`, `delete`, `in`, `of`, `async`, `await`, `yield`, `true`, `false`, `null`, `undefined`
-* Strings: `""`, `''`, `` ``
-* Comments: `//`, `/* */`
-* Numbers: integers, floats, hex numbers
-* Class definitions: `class`
-* Function declarations: `function`
-* Arrow functions: `=>`
-* Variables: `let`, `const`, `var`
-* Constants: uppercase identifiers
-* Operators: `+`, `-`, `*`, `/`, `%`, `&`, `|`, `^`, `~`, `==`, `!=`, `===`, `!==`, `>`, `<`, `>=` , `<=`, `<<`, `>>`, `>>>`, `&&`, `||`, `??`
-* Brackets, parentheses, and braces: `[`, `]`, `(`, `)`, `{`, `}`
-* Function parameters: `(name: type)`
-* Object properties: `.property`
-* Template literal placeholders: `${expression}`
+**Description**: Returns the style for keywords.
 
-Note that this is not an exhaustive list, and you may need to add additional patterns to cover all the syntax elements of JavaScript.
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val keywordStyle = theme.getKeywordStyle()
+```
+
+### `JavaScriptDefaultTheme.getStringStyle()`
+
+**Description**: Returns the style for strings.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val stringStyle = theme.getStringStyle()
+```
+
+### `JavaScriptDefaultTheme.getCommentStyle()`
+
+**Description**: Returns the style for comments.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val commentStyle = theme.getCommentStyle()
+```
+
+### `JavaScriptDefaultTheme.getNumbersStyle()`
+
+**Description**: Returns the style for numbers.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val numbersStyle = theme.getNumbersStyle()
+```
+
+### `JavaScriptDefaultTheme.getDefaultTextStyle()`
+
+**Description**: Returns the default text style.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val defaultTextStyle = theme.getDefaultTextStyle()
+```
+
+### `JavaScriptDefaultTheme.getLanguageSpecificStyle(tokenType)`
+
+**Description**: Returns the language-specific style for the given token type.
+
+**Parameters**:
+
+* `tokenType` (String): The token type.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = JavaScriptDefaultTheme()
+val style = theme.getLanguageSpecificStyle("javascript_function")
+```
