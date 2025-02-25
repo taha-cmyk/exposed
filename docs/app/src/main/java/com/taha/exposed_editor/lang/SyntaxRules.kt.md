@@ -1,83 +1,136 @@
-**Syntax Highlighting Library**
-==========================
+Syntax Rules
+================
 
 Overview
 --------
 
-This library provides a simple way to apply syntax highlighting to code strings in Android applications using Jetpack Compose. It uses a list of predefined patterns to match specific parts of the code, such as keywords, strings, comments, and numbers, and applies different text styles to each match.
+The `SyntaxRules` class provides a set of functions and interfaces for syntax highlighting in a text editor. It defines a data class `SyntaxPattern` to represent a syntax pattern and its corresponding style. The `SyntaxHighlightingTheme` interface defines methods to get different text styles for keywords, strings, comments, numbers, and default text.
 
-### SyntaxHighlightingTheme Interface
+API Reference
+-------------
 
-The `SyntaxHighlightingTheme` interface defines a set of methods that must be implemented to provide a custom syntax highlighting theme. These methods return the text styles for different parts of the code.
+### `SyntaxPattern(val regex: Regex, val style: TextStyle)`
 
-#### Methods
+**Description**: A data class to represent a syntax pattern and its corresponding style.
 
-* `getKeywordStyle()`: Returns the text style for keywords.
-* `getStringStyle()`: Returns the text style for strings.
-* `getCommentStyle()`: Returns the text style for comments.
-* `getNumbersStyle()`: Returns the text style for numbers.
-* `getDefaultTextStyle()`: Returns the default text style for plain text.
-* `getLanguageSpecificStyle(tokenType: String)`: Returns the text style for language-specific tokens.
+**Parameters**:
+- `regex` (Regex): The regular expression to match the syntax pattern.
+- `style` (TextStyle): The style to apply to the matched text.
 
-### SyntaxPattern Data Class
+**Returns**: An instance of `SyntaxPattern`.
 
-The `SyntaxPattern` data class represents a single pattern to match in the code. It has two properties:
-
-* `regex`: A regular expression to match the pattern.
-* `style`: The text style to apply to the matched pattern.
-
-### buildHighlightedCode Function
-
-The `buildHighlightedCode` function takes a code string and a list of `SyntaxPattern` objects, and returns an `AnnotatedString` with the syntax highlighting applied.
-
-#### Parameters
-
-* `code`: The code string to apply syntax highlighting to.
-* `patterns`: A list of `SyntaxPattern` objects to match in the code.
-
-#### Return Value
-
-An `AnnotatedString` with the syntax highlighting applied.
-
-#### Usage Example
-
+**Example**:
 ```kotlin
-val theme = object : SyntaxHighlightingTheme {
+val keywordPattern = SyntaxPattern(Regex("\\b(if|else|for|while)\\b"), TextStyle(fontSize = 16.sp, color = Color.Blue))
+```
+
+### `interface SyntaxHighlightingTheme`
+
+**Description**: An interface to define methods to get different text styles for syntax highlighting.
+
+**Methods**:
+- `getKeywordStyle()`: Returns the text style for keywords.
+- `getStringStyle()`: Returns the text style for strings.
+- `getCommentStyle()`: Returns the text style for comments.
+- `getNumbersStyle()`: Returns the text style for numbers.
+- `getDefaultTextStyle()`: Returns the default text style.
+- `getLanguageSpecificStyle(tokenType: String)`: Returns the text style for a language-specific token type.
+
+**Example**:
+```kotlin
+class MySyntaxHighlightingTheme : SyntaxHighlightingTheme {
     override fun getKeywordStyle(): TextStyle {
-        return TextStyle(color = Color.Blue)
+        return TextStyle(fontSize = 16.sp, color = Color.Blue)
     }
 
     override fun getStringStyle(): TextStyle {
-        return TextStyle(color = Color.Green)
+        return TextStyle(fontSize = 16.sp, color = Color.Green)
     }
 
     override fun getCommentStyle(): TextStyle {
-        return TextStyle(color = Color.Gray)
+        return TextStyle(fontSize = 16.sp, color = Color.Gray)
     }
 
     override fun getNumbersStyle(): TextStyle {
-        return TextStyle(color = Color.Red)
+        return TextStyle(fontSize = 16.sp, color = Color.Red)
     }
 
     override fun getDefaultTextStyle(): TextStyle {
-        return TextStyle(color = Color.Black)
+        return TextStyle(fontSize = 16.sp, color = Color.Black)
     }
 
     override fun getLanguageSpecificStyle(tokenType: String): TextStyle {
-        // Implement language-specific styles here
-        return TextStyle(color = Color.Black)
+        return when (tokenType) {
+            "function" -> TextStyle(fontSize = 16.sp, color = Color.Purple)
+            else -> getDefaultTextStyle()
+        }
     }
 }
+```
 
+### `buildHighlightedCode(code: String, patterns: List<SyntaxPattern>)`
+
+**Description**: Builds an annotated string with syntax highlighting based on the given code and patterns.
+
+**Parameters**:
+- `code` (String): The code to apply syntax highlighting to.
+- `patterns` (List<SyntaxPattern>): A list of syntax patterns to apply.
+
+**Returns**: An annotated string with syntax highlighting.
+
+**Example**:
+```kotlin
+val code = "fun main() { println(\"Hello, World!\") }"
 val patterns = listOf(
-    SyntaxPattern(Regex("\\b(if|else|for|while)\\b"), theme.getKeywordStyle()),
-    SyntaxPattern(Regex("\"[^\"]*\""), theme.getStringStyle()),
-    SyntaxPattern(Regex("//.*"), theme.getCommentStyle()),
-    SyntaxPattern(Regex("\\b\\d+\\b"), theme.getNumbersStyle())
+    SyntaxPattern(Regex("\\b(fun|main)\\b"), TextStyle(fontSize = 16.sp, color = Color.Blue)),
+    SyntaxPattern(Regex("\"[^\"]*\""), TextStyle(fontSize = 16.sp, color = Color.Green))
 )
-
-val code = "if (true) { println(\"Hello, World!\") } // Comment"
 val highlightedCode = buildHighlightedCode(code, patterns)
 ```
 
-In this example, we define a custom `SyntaxHighlightingTheme` and a list of `SyntaxPattern` objects to match keywords, strings, comments, and numbers. We then pass the code string and the list of patterns to the `buildHighlightedCode` function to get the syntax highlighted `AnnotatedString`.
+Usage Examples
+-------------
+
+### Syntax Highlighting Example
+
+```kotlin
+val code = "fun main() { println(\"Hello, World!\") }"
+val patterns = listOf(
+    SyntaxPattern(Regex("\\b(fun|main)\\b"), TextStyle(fontSize = 16.sp, color = Color.Blue)),
+    SyntaxPattern(Regex("\"[^\"]*\""), TextStyle(fontSize = 16.sp, color = Color.Green))
+)
+val highlightedCode = buildHighlightedCode(code, patterns)
+```
+
+### Custom Syntax Highlighting Theme Example
+
+```kotlin
+class MySyntaxHighlightingTheme : SyntaxHighlightingTheme {
+    override fun getKeywordStyle(): TextStyle {
+        return TextStyle(fontSize = 16.sp, color = Color.Blue)
+    }
+
+    override fun getStringStyle(): TextStyle {
+        return TextStyle(fontSize = 16.sp, color = Color.Green)
+    }
+
+    override fun getCommentStyle(): TextStyle {
+        return TextStyle(fontSize = 16.sp, color = Color.Gray)
+    }
+
+    override fun getNumbersStyle(): TextStyle {
+        return TextStyle(fontSize = 16.sp, color = Color.Red)
+    }
+
+    override fun getDefaultTextStyle(): TextStyle {
+        return TextStyle(fontSize = 16.sp, color = Color.Black)
+    }
+
+    override fun getLanguageSpecificStyle(tokenType: String): TextStyle {
+        return when (tokenType) {
+            "function" -> TextStyle(fontSize = 16.sp, color = Color.Purple)
+            else -> getDefaultTextStyle()
+        }
+    }
+}
+```
