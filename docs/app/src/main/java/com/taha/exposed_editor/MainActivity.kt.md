@@ -1,22 +1,39 @@
-**Exposed Editor Documentation**
-=====================================
+# Exposed Editor Documentation
 
-**Overview**
-------------
+## Overview
 
-The Exposed Editor is a syntax-highlighted text editor for Android, built using Jetpack Compose. It currently supports the Ruby programming language and provides a customizable theme.
+The Exposed Editor is a simple code editor application that provides syntax highlighting for the Ruby programming language. It uses Jetpack Compose for building the user interface and a custom syntax highlighting mechanism.
 
-**Function Descriptions**
-------------------------
+## Class and Function Descriptions
 
-### `SyntaxProvider.getSyntaxPatterns(language, theme)`
+### `MainActivity`
 
-**Description**: Retrieves the syntax patterns for a given language and theme.
+**Description**: The main activity of the application, responsible for setting up the content view and displaying the syntax highlighted code editor.
+
+**Parameters**: None
+
+**Returns**: None
+
+**Example**:
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            // ...
+        }
+    }
+}
+```
+
+### `SyntaxProvider`
+
+**Description**: A utility class that provides syntax patterns for a given programming language.
 
 **Parameters**:
 
-* `language` (Language): The programming language for which to retrieve syntax patterns.
-* `theme` (Theme): The theme to apply to the syntax patterns.
+* `language` (Language): The programming language for which to retrieve the syntax patterns.
+* `theme` (Theme): The theme to use for the syntax highlighting.
 
 **Returns**: A list of syntax patterns for the given language and theme.
 
@@ -27,31 +44,86 @@ The Exposed Editor is a syntax-highlighted text editor for Android, built using 
 val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY, getRubyTheme(RubyThemes.DEFAULT))
 ```
 
-### `getRubyTheme(theme)`
+### `getRubySyntaxPatterns()`
 
-**Description**: Retrieves the Ruby theme corresponding to the given theme identifier.
+**Description**: Retrieves the syntax patterns for the Ruby programming language.
 
-**Parameters**:
+**Parameters**: None
 
-* `theme` (RubyThemes): The identifier of the Ruby theme to retrieve.
-
-**Returns**: The Ruby theme corresponding to the given identifier.
+**Returns**: A list of syntax patterns for the Ruby language.
 
 **Throws**: None
 
 **Example**:
 ```kotlin
-val rubyTheme = getRubyTheme(RubyThemes.DEFAULT)
+val patterns = getRubySyntaxPatterns()
 ```
 
-### `SyntaxHighlightedTextField(code, patterns)`
+### `getRubyTheme()`
 
-**Description**: A Jetpack Compose UI component that displays syntax-highlighted text.
+**Description**: Retrieves the theme for the Ruby programming language.
 
 **Parameters**:
 
-* `code` (String): The text to display with syntax highlighting.
-* `patterns` (List<SyntaxPattern>): The syntax patterns to apply to the text.
+* `theme` (RubyThemes): The theme to use for the Ruby language.
+
+**Returns**: A theme for the Ruby language.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val theme = getRubyTheme(RubyThemes.DEFAULT)
+```
+
+### `SyntaxHighlightedTextField`
+
+**Description**: A composable function that displays a text field with syntax highlighting.
+
+**Parameters**:
+
+* `code` (String): The code to display in the text field.
+* `patterns` (List<SyntaxPattern>): The syntax patterns to use for highlighting.
+
+**Returns**: A composable function that displays a text field with syntax highlighting.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+SyntaxHighlightedTextField(
+    code = """ 
+    """.trimIndent(),
+    patterns = patterns
+)
+```
+
+### `PreviewHighlightedCodeEditor`
+
+**Description**: A preview composable function that displays a syntax highlighted code editor.
+
+**Parameters**: None
+
+**Returns**: A composable function that displays a syntax highlighted code editor.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+@Preview
+@Composable
+fun PreviewHighlightedCodeEditor() {
+    // ...
+}
+```
+
+## API Reference
+
+### `MainActivity()`
+
+**Description**: The main activity of the application, responsible for setting up the content view and displaying the syntax highlighted code editor.
+
+**Parameters**: None
 
 **Returns**: None
 
@@ -59,106 +131,103 @@ val rubyTheme = getRubyTheme(RubyThemes.DEFAULT)
 
 **Example**:
 ```kotlin
-SyntaxHighlightedTextField(
-    code = """                                 
-    """.trimIndent(),
-    patterns = patterns
-)
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            // ...
+        }
+    }
+}
 ```
-
-**Usage Examples**
--------------------
-
-### Creating a Syntax-Highlighted Text Editor
-
-To create a syntax-highlighted text editor, use the `SyntaxHighlightedTextField` component and pass in the code to display and the syntax patterns to apply:
-```kotlin
-val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY, getRubyTheme(RubyThemes.DEFAULT))
-
-SyntaxHighlightedTextField(
-    code = """                                 
-    """.trimIndent(),
-    patterns = patterns
-)
-```
-
-### Customizing the Theme
-
-To customize the theme, use the `getRubyTheme` function to retrieve the desired theme and pass it to the `SyntaxProvider.getSyntaxPatterns` function:
-```kotlin
-val rubyTheme = getRubyTheme(RubyThemes.DARK)
-
-val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY, rubyTheme)
-
-SyntaxHighlightedTextField(
-    code = """                                 
-    """.trimIndent(),
-    patterns = patterns
-)
-```
-
-**API Reference**
-------------------
 
 ### `SyntaxProvider.getSyntaxPatterns(language, theme)`
 
-* **Description**: Retrieves the syntax patterns for a given language and theme.
-* **Parameters**:
-	+ `language` (Language): The programming language for which to retrieve syntax patterns.
-	+ `theme` (Theme): The theme to apply to the syntax patterns.
-* **Returns**: A list of syntax patterns for the given language and theme.
-* **Throws**: None
-* **Example**:
+**Description**: Retrieves the syntax patterns for a given programming language and theme.
+
+**Parameters**:
+
+* `language` (Language): The programming language for which to retrieve the syntax patterns.
+* `theme` (Theme): The theme to use for the syntax highlighting.
+
+**Returns**: A list of syntax patterns for the given language and theme.
+
+**Throws**: None
+
+**Example**:
 ```kotlin
 val patterns = SyntaxProvider.getSyntaxPatterns(Language.RUBY, getRubyTheme(RubyThemes.DEFAULT))
+```
+
+### `getRubySyntaxPatterns()`
+
+**Description**: Retrieves the syntax patterns for the Ruby programming language.
+
+**Parameters**: None
+
+**Returns**: A list of syntax patterns for the Ruby language.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val patterns = getRubySyntaxPatterns()
 ```
 
 ### `getRubyTheme(theme)`
 
-* **Description**: Retrieves the Ruby theme corresponding to the given theme identifier.
-* **Parameters**:
-	+ `theme` (RubyThemes): The identifier of the Ruby theme to retrieve.
-* **Returns**: The Ruby theme corresponding to the given identifier.
-* **Throws**: None
-* **Example**:
+**Description**: Retrieves the theme for the Ruby programming language.
+
+**Parameters**:
+
+* `theme` (RubyThemes): The theme to use for the Ruby language.
+
+**Returns**: A theme for the Ruby language.
+
+**Throws**: None
+
+**Example**:
 ```kotlin
-val rubyTheme = getRubyTheme(RubyThemes.DEFAULT)
+val theme = getRubyTheme(RubyThemes.DEFAULT)
 ```
 
 ### `SyntaxHighlightedTextField(code, patterns)`
 
-* **Description**: A Jetpack Compose UI component that displays syntax-highlighted text.
-* **Parameters**:
-	+ `code` (String): The text to display with syntax highlighting.
-	+ `patterns` (List<SyntaxPattern>): The syntax patterns to apply to the text.
-* **Returns**: None
-* **Throws**: None
-* **Example**:
+**Description**: A composable function that displays a text field with syntax highlighting.
+
+**Parameters**:
+
+* `code` (String): The code to display in the text field.
+* `patterns` (List<SyntaxPattern>): The syntax patterns to use for highlighting.
+
+**Returns**: A composable function that displays a text field with syntax highlighting.
+
+**Throws**: None
+
+**Example**:
 ```kotlin
 SyntaxHighlightedTextField(
-    code = """                                 
+    code = """ 
     """.trimIndent(),
     patterns = patterns
 )
 ```
 
-### `Language`
+### `PreviewHighlightedCodeEditor()`
 
-* **Description**: An enumeration of supported programming languages.
-* **Values**:
-	+ `RUBY`
-* **Example**:
+**Description**: A preview composable function that displays a syntax highlighted code editor.
+
+**Parameters**: None
+
+**Returns**: A composable function that displays a syntax highlighted code editor.
+
+**Throws**: None
+
+**Example**:
 ```kotlin
-val language = Language.RUBY
-```
-
-### `RubyThemes`
-
-* **Description**: An enumeration of available Ruby themes.
-* **Values**:
-	+ `DEFAULT`
-	+ `DARK`
-* **Example**:
-```kotlin
-val theme = RubyThemes.DEFAULT
+@Preview
+@Composable
+fun PreviewHighlightedCodeEditor() {
+    // ...
+}
 ```
