@@ -1,78 +1,123 @@
-## Ruby Dark Theme
-### Overview
-The RubyDarkTheme class provides a custom syntax highlighting theme for the Ruby programming language. It implements the SyntaxHighlightingTheme interface and provides styles for various syntax elements, including keywords, strings, comments, numbers, and more.
+# Ruby Dark Theme
+================
 
-### Functions
+## Overview
+----------
 
-#### getKeywordStyle
-Returns the TextStyle for keywords in Ruby code.
+The Ruby Dark Theme is a custom theme for syntax highlighting in Ruby programming language. It provides a set of predefined text styles for keywords, strings, comments, numbers, and other language-specific elements.
 
-* Parameters: None
-* Return Value: TextStyle with color #5ebfdd (brighter blue)
+## Function Descriptions
+----------------------
 
-#### getStringStyle
-Returns the TextStyle for strings in Ruby code.
+### `getKeywordStyle()`
 
-* Parameters: None
-* Return Value: TextStyle with color #4caf50 (brighter green)
+**Description**: Returns the text style for keywords in Ruby.
 
-#### getCommentStyle
-Returns the TextStyle for comments in Ruby code.
+**Parameters**: None
 
-* Parameters: None
-* Return Value: TextStyle with color #757575 (lighter gray) and font weight light
+**Returns**: A `TextStyle` object with the color set to a brighter blue (`#5ebfdd`).
 
-#### getNumbersStyle
-Returns the TextStyle for numbers in Ruby code.
-
-* Parameters: None
-* Return Value: TextStyle with color #4caf50 (brighter green)
-
-#### getDefaultTextStyle
-Returns the TextStyle for default text in Ruby code.
-
-* Parameters: None
-* Return Value: TextStyle with color #E0E0E0 (light gray)
-
-#### getLanguageSpecificStyle
-Returns the TextStyle for a specific token type in Ruby code.
-
-* Parameters:
-	+ tokenType: String - the type of token to get the style for
-* Return Value: TextStyle - the style for the specified token type, or a default style with color #E0E0E0 (light gray) if the token type is unknown
-
-### Language Specific Styles
-The RubyDarkTheme class provides styles for the following language-specific token types:
-
-* ruby_class: TextStyle with color #80DEEA (brighter cyan) and font weight bold
-* ruby_method: TextStyle with color #F48FB1 (brighter pink)
-* ruby_variable: TextStyle with color #B0BEC5 (light gray)
-* ruby_symbol: TextStyle with color #ffffcc80 (brighter yellow) and font weight bold
-* ruby_constant: TextStyle with color #F8BBD0 (brighter pink) and font weight bold
-* ruby_operator: TextStyle with color #CE93D8 (brighter magenta)
-* ruby_bracket: TextStyle with color #B0BEC5 (light gray)
-* ruby_parenthesis: TextStyle with color #B0BEC5 (light gray)
-* ruby_brace: TextStyle with color #B0BEC5 (light gray)
-* ruby_parameter: TextStyle with color #FFAB91 (brighter orange)
-* ruby_local_variable: TextStyle with color #B0BEC5 (light gray)
-* ruby_global_variable: TextStyle with color #B0BEC5 (light gray)
-* ruby_instance_variable: TextStyle with color #C5E1A5 (brighter green)
-* ruby_class_variable: TextStyle with color #C5E1A5 (brighter green)
-* ruby_builtin_function: TextStyle with color #CC7832
-
-### Usage Examples
-
+**Example**:
 ```kotlin
-val theme = RubyDarkTheme()
-
-// Get the style for keywords
-val keywordStyle = theme.getKeywordStyle()
-
-// Get the style for strings
-val stringStyle = theme.getStringStyle()
-
-// Get the style for a specific token type
-val classStyle = theme.getLanguageSpecificStyle("ruby_class")
+val keywordStyle = RubyDarkTheme().getKeywordStyle()
 ```
 
-Note: The colors used in this theme are inspired by the Ruby syntax highlighting theme used in popular text editors and IDEs. You can customize the colors to suit your personal preferences or branding requirements.
+### `getStringStyle()`
+
+**Description**: Returns the text style for strings in Ruby.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to a brighter green (`#4caf50`).
+
+**Example**:
+```kotlin
+val stringStyle = RubyDarkTheme().getStringStyle()
+```
+
+### `getCommentStyle()`
+
+**Description**: Returns the text style for comments in Ruby.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to a lighter gray (`#757575`) and font weight set to light.
+
+**Example**:
+```kotlin
+val commentStyle = RubyDarkTheme().getCommentStyle()
+```
+
+### `getNumbersStyle()`
+
+**Description**: Returns the text style for numbers in Ruby.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to a brighter green (`#4caf50`).
+
+**Example**:
+```kotlin
+val numbersStyle = RubyDarkTheme().getNumbersStyle()
+```
+
+### `getDefaultTextStyle()`
+
+**Description**: Returns the default text style for Ruby.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to a light gray (`#E0E0E0`).
+
+**Example**:
+```kotlin
+val defaultTextStyle = RubyDarkTheme().getDefaultTextStyle()
+```
+
+### `getLanguageSpecificStyle(tokenType: String)`
+
+**Description**: Returns the text style for a specific language element in Ruby.
+
+**Parameters**:
+
+* `tokenType` (String): The type of language element (e.g. "ruby_class", "ruby_method", etc.)
+
+**Returns**: A `TextStyle` object with the color and font weight set according to the language element type. If the token type is unknown, returns a default text style with a light gray color (`#E0E0E0`).
+
+**Example**:
+```kotlin
+val classStyle = RubyDarkTheme().getLanguageSpecificStyle("ruby_class")
+```
+
+## API Reference
+--------------
+
+### `RubyDarkTheme`
+
+* `getKeywordStyle()`: TextStyle
+* `getStringStyle()`: TextStyle
+* `getCommentStyle()`: TextStyle
+* `getNumbersStyle()`: TextStyle
+* `getDefaultTextStyle()`: TextStyle
+* `getLanguageSpecificStyle(tokenType: String)`: TextStyle
+
+### `TextStyle`
+
+* `color`: Color
+* `fontWeight`: FontWeight
+
+## Usage Examples
+---------------
+
+```kotlin
+val rubyDarkTheme = RubyDarkTheme()
+
+val keywordStyle = rubyDarkTheme.getKeywordStyle()
+val stringStyle = rubyDarkTheme.getStringStyle()
+val commentStyle = rubyDarkTheme.getCommentStyle()
+val numbersStyle = rubyDarkTheme.getNumbersStyle()
+val defaultTextStyle = rubyDarkTheme.getDefaultTextStyle()
+
+val classStyle = rubyDarkTheme.getLanguageSpecificStyle("ruby_class")
+val methodStyle = rubyDarkTheme.getLanguageSpecificStyle("ruby_method")
+```
