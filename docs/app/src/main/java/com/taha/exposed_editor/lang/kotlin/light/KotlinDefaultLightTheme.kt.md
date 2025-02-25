@@ -1,92 +1,134 @@
-Kotlin Default Theme
-=====================
+Kotlin Default Light Theme
+==========================
 
 Overview
 --------
 
-The `KotlinDefaultTheme` class is a custom implementation of the `SyntaxHighlightingTheme` interface. It provides a set of predefined styles for syntax highlighting in Kotlin code editors.
+The Kotlin Default Light Theme is a class that implements the `SyntaxHighlightingTheme` interface. It provides a set of predefined styles for syntax highlighting in Kotlin programming language.
 
-### Syntax Highlighting Theme Interface
+### Class Description
 
-The `SyntaxHighlightingTheme` interface defines a set of methods that must be implemented by any syntax highlighting theme. These methods return `TextStyle` objects that define the visual appearance of different syntax elements in the code editor.
+The `KotlinDefaultTheme` class provides a set of methods that return `TextStyle` objects, which define the appearance of different syntax elements in Kotlin code.
 
-Function Descriptions
----------------------
+API Reference
+-------------
 
-### getKeywordStyle()
+### `getKeywordStyle()`
 
-*   Returns a `TextStyle` object that defines the visual appearance of keywords in Kotlin code.
-*   Parameters: None
-*   Return value: `TextStyle` object with color `#399BC5`.
+**Description**: Returns the text style for keywords in Kotlin code.
 
-### getStringStyle()
+**Parameters**: None
 
-*   Returns a `TextStyle` object that defines the visual appearance of string literals in Kotlin code.
-*   Parameters: None
-*   Return value: `TextStyle` object with color `#007A09`.
+**Returns**: A `TextStyle` object with the color set to `#399bc5`.
 
-### getCommentStyle()
+**Example**:
+```kotlin
+val keywordStyle = KotlinDefaultTheme().getKeywordStyle()
+```
 
-*   Returns a `TextStyle` object that defines the visual appearance of comments in Kotlin code.
-*   Parameters: None
-*   Return value: `TextStyle` object with color `#888888` and font weight `Light`.
+### `getStringStyle()`
 
-### getNumbersStyle()
+**Description**: Returns the text style for strings in Kotlin code.
 
-*   Returns a `TextStyle` object that defines the visual appearance of numbers in Kotlin code.
-*   Parameters: None
-*   Return value: `TextStyle` object with color `#007A09`.
+**Parameters**: None
 
-### getDefaultTextStyle()
+**Returns**: A `TextStyle` object with the color set to `#007a09`.
 
-*   Returns a `TextStyle` object that defines the default visual appearance of text in the code editor.
-*   Parameters: None
-*   Return value: `TextStyle` object with color `#FFFFFF`.
+**Example**:
+```kotlin
+val stringStyle = KotlinDefaultTheme().getStringStyle()
+```
 
-### getLanguageSpecificStyle(tokenType: String)
+### `getCommentStyle()`
 
-*   Returns a `TextStyle` object that defines the visual appearance of a specific syntax element in Kotlin code.
-*   Parameters: `tokenType` - a string that identifies the type of syntax element (e.g. "kotlin_class", "kotlin_function", etc.)
-*   Return value: `TextStyle` object that defines the visual appearance of the specified syntax element, or a default `TextStyle` object with color `#FFFFFF` if the token type is not recognized.
+**Description**: Returns the text style for comments in Kotlin code.
 
-Language Specific Styles
-------------------------
+**Parameters**: None
 
-The `KotlinDefaultTheme` class defines a set of language specific styles that can be used to customize the appearance of Kotlin code in the editor. These styles are stored in a map and can be retrieved using the `getLanguageSpecificStyle(tokenType: String)` method.
+**Returns**: A `TextStyle` object with the color set to `#888888` and font weight set to `FontWeight.Light`.
 
-The following language specific styles are defined:
+**Example**:
+```kotlin
+val commentStyle = KotlinDefaultTheme().getCommentStyle()
+```
 
-*   `kotlin_class`: `TextStyle` object with color `#A9E2F3` and font weight `Bold`.
-*   `kotlin_function`: `TextStyle` object with color `#F781F3`.
-*   `kotlin_property`: `TextStyle` object with color `#81F7F3`.
-*   `kotlin_annotation`: `TextStyle` object with color `#C6A83B` and font weight `Bold`.
-*   `kotlin_type`: `TextStyle` object with color `#DarkGray` and font weight `Bold`.
-*   `kotlin_constant`: `TextStyle` object with color `#F5A9D0` and font weight `Bold`.
-*   `kotlin_operator`: `TextStyle` object with color `#Magenta`.
-*   `kotlin_separator`: `TextStyle` object with color `#DarkGray`.
-*   `kotlin_bracket`: `TextStyle` object with color `#DarkGray`.
-*   `kotlin_parenthesis`: `TextStyle` object with color `#DarkGray`.
-*   `kotlin_brace`: `TextStyle` object with color `#DarkGray`.
-*   `kotlin_parameter`: `TextStyle` object with color `#FD971F`.
-*   `kotlin_local_variable`: `TextStyle` object with color `#96CBFE`.
-*   `kotlin_global_variable`: `TextStyle` object with color `#66D9EF`.
+### `getNumbersStyle()`
+
+**Description**: Returns the text style for numbers in Kotlin code.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to `#007a09`.
+
+**Example**:
+```kotlin
+val numbersStyle = KotlinDefaultTheme().getNumbersStyle()
+```
+
+### `getDefaultTextStyle()`
+
+**Description**: Returns the default text style for Kotlin code.
+
+**Parameters**: None
+
+**Returns**: A `TextStyle` object with the color set to `#FFFFFF`.
+
+**Example**:
+```kotlin
+val defaultTextStyle = KotlinDefaultTheme().getDefaultTextStyle()
+```
+
+### `getLanguageSpecificStyle(tokenType: String)`
+
+**Description**: Returns the text style for a specific language token type in Kotlin code.
+
+**Parameters**:
+
+* `tokenType` (String): The type of the language token.
+
+**Returns**: A `TextStyle` object that corresponds to the given token type, or a default style if the token type is not found.
+
+**Example**:
+```kotlin
+val classStyle = KotlinDefaultTheme().getLanguageSpecificStyle("kotlin_class")
+```
+
+Public Properties
+-----------------
+
+* `languageSpecificStyles`: A map of language-specific styles, where each key is a token type and each value is a `TextStyle` object.
 
 Usage Examples
 -------------
 
-To use the `KotlinDefaultTheme` class, you can create an instance of it and pass it to a code editor or syntax highlighting component.
-
 ```kotlin
 val theme = KotlinDefaultTheme()
-// Pass the theme to a code editor or syntax highlighting component
-```
 
-You can also customize the appearance of Kotlin code by retrieving a `TextStyle` object for a specific syntax element and modifying its properties.
+val keywordStyle = theme.getKeywordStyle()
+val stringStyle = theme.getStringStyle()
+val commentStyle = theme.getCommentStyle()
+val numbersStyle = theme.getNumbersStyle()
+val defaultTextStyle = theme.getDefaultTextStyle()
 
-```kotlin
 val classStyle = theme.getLanguageSpecificStyle("kotlin_class")
-// Modify the properties of the TextStyle object
-classStyle.color = Color(0xFF0000FF)
+val functionStyle = theme.getLanguageSpecificStyle("kotlin_function")
 ```
 
-Note that the `KotlinDefaultTheme` class is designed to be used with Kotlin code editors and syntax highlighting components. It may not be compatible with other programming languages or syntax highlighting systems.
+Note that the `languageSpecificStyles` map contains the following token types:
+
+* `kotlin_class`
+* `kotlin_function`
+* `kotlin_property`
+* `kotlin_annotation`
+* `kotlin_type`
+* `kotlin_constant`
+* `kotlin_operator`
+* `kotlin_separator`
+* `kotlin_bracket`
+* `kotlin_parenthesis`
+* `kotlin_brace`
+* `kotlin_parameter`
+* `kotlin_local_variable`
+* `kotlin_global_variable`
+
+Each token type corresponds to a specific style in the `languageSpecificStyles` map. If a token type is not found in the map, the `getLanguageSpecificStyle` method returns a default style.
