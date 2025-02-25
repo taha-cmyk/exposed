@@ -1,101 +1,232 @@
-# Ruby Syntax Highlighting Patterns
+# Ruby Syntax Patterns
+====================================
 
 ## Overview
-The `getRubySyntaxPatterns` function returns a list of syntax patterns for the Ruby programming language. These patterns can be used to highlight different elements of Ruby code, such as keywords, strings, comments, and more.
+------------
 
-## Function Description
-### getRubySyntaxPatterns
+This module provides a list of syntax patterns for the Ruby programming language. These patterns are used for syntax highlighting and can be customized using a `SyntaxHighlightingTheme`.
 
-*   Returns a list of syntax patterns for the Ruby programming language.
-*   Takes a `theme` parameter of type `SyntaxHighlightingTheme`, which provides styles for different syntax elements.
+## API Reference
+-----------------
 
-### Parameters
+### `getRubySyntaxPatterns(theme: SyntaxHighlightingTheme)`
 
-*   `theme`: A `SyntaxHighlightingTheme` object that provides styles for different syntax elements.
+**Description**: Returns a list of syntax patterns for the Ruby programming language.
 
-### Return Value
+**Parameters**:
+- `theme` (SyntaxHighlightingTheme): The theme to use for syntax highlighting.
 
-*   A list of `SyntaxPattern` objects, each representing a syntax pattern for Ruby.
+**Returns**: A list of `SyntaxPattern` objects.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+val theme = SyntaxHighlightingTheme()
+val patterns = getRubySyntaxPatterns(theme)
+```
 
 ## Syntax Patterns
+------------------
 
 The following syntax patterns are included:
 
 ### Keywords
 
-*   Pattern: `\\b(alias|and|begin|break|case|class|def|defined\\?|do|else|elsif|end|ensure|false|for|if|in|module|next|nil|not|or|redo|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)\\b`
-*   Style: `theme.getKeywordStyle()`
+* `alias`
+* `and`
+* `begin`
+* `break`
+* `case`
+* `class`
+* `def`
+* `defined?`
+* `do`
+* `else`
+* `elsif`
+* `end`
+* `ensure`
+* `false`
+* `for`
+* `if`
+* `in`
+* `module`
+* `next`
+* `nil`
+* `not`
+* `or`
+* `redo`
+* `rescue`
+* `retry`
+* `return`
+* `self`
+* `super`
+* `then`
+* `true`
+* `undef`
+* `unless`
+* `until`
+* `when`
+* `while`
+* `yield`
 
 ### Built-in Functions
 
-*   Pattern: `\\b(puts|gets|require|include|extend|each|map|select|reject|reduce|inject|find|detect|all\\?|any\\?|none\\?|one\\?|sort|sort_by|reverse|length|size|count|first|last|min|max|sum|uniq|join|split|gsub|sub|chomp|strip|lstrip|rstrip|to_s|to_i|to_f|to_a|to_h|to_sym|nil\\?|empty\\?|include\\?|key\\?|value\\?|merge|fetch|delete|clear|push|pop|shift|unshift|concat|flatten|compact|zip|cycle|take|drop|take_while|drop_while|group_by|partition|slice|sample|shuffle|rand|exit|abort|raise|catch|throw|lambda|proc|call|eval|instance_eval|class_eval|define_method|attr_accessor|attr_reader|attr_writer|private|protected|public)\\b`
-*   Style: `theme.getLanguageSpecificStyle("ruby_builtin_function")`
+* `puts`
+* `gets`
+* `require`
+* `include`
+* `extend`
+* `each`
+* `map`
+* `select`
+* `reject`
+* `reduce`
+* `inject`
+* `find`
+* `detect`
+* `all?`
+* `any?`
+* `none?`
+* `one?`
+* `sort`
+* `sort_by`
+* `reverse`
+* `length`
+* `size`
+* `count`
+* `first`
+* `last`
+* `min`
+* `max`
+* `sum`
+* `uniq`
+* `join`
+* `split`
+* `gsub`
+* `sub`
+* `chomp`
+* `strip`
+* `lstrip`
+* `rstrip`
+* `to_s`
+* `to_i`
+* `to_f`
+* `to_a`
+* `to_h`
+* `to_sym`
+* `nil?`
+* `empty?`
+* `include?`
+* `key?`
+* `value?`
+* `merge`
+* `fetch`
+* `delete`
+* `clear`
+* `push`
+* `pop`
+* `shift`
+* `unshift`
+* `concat`
+* `flatten`
+* `compact`
+* `zip`
+* `cycle`
+* `take`
+* `drop`
+* `take_while`
+* `drop_while`
+* `group_by`
+* `partition`
+* `slice`
+* `sample`
+* `shuffle`
+* `rand`
+* `exit`
+* `abort`
+* `raise`
+* `catch`
+* `throw`
+* `lambda`
+* `proc`
+* `call`
+* `eval`
+* `instance_eval`
+* `class_eval`
+* `define_method`
+* `attr_accessor`
+* `attr_reader`
+* `attr_writer`
+* `private`
+* `protected`
+* `public`
 
 ### Strings
 
-*   Pattern: `(\"\"\".*?\"\"\"|\"[^\"]*\")`
-*   Style: `theme.getStringStyle()`
-
-### Single-Quoted Strings
-
-*   Pattern: `\'([^\'\\\\]|\\\\.)*\'`
-*   Style: `theme.getStringStyle()`
-
-### Multi-line Strings
-
-*   Pattern: `\"\"\"(.*?)\"\"\"`
-*   Style: `theme.getStringStyle()`
+* Double-quoted strings: `"string"`
+* Single-quoted strings: `'string'`
+* Multi-line strings: `"""string"""`
 
 ### Symbols
 
-*   Pattern: `(:[\\w_]+)`
-*   Style: `theme.getLanguageSpecificStyle("ruby_symbol")`
+* `:symbol`
 
 ### Numbers
 
-*   Pattern: `\\b([0-9]+(\\.[0-9]+)?|0x[0-9a-fA-F]+)\\b`
-*   Style: `theme.getNumbersStyle()`
+* Integers: `123`
+* Floats: `123.45`
+* Hexadecimal numbers: `0x123`
 
-### Single-line Comments
+### Comments
 
-*   Pattern: `#.*`
-*   Style: `theme.getCommentStyle()`
+* Single-line comments: `# comment`
 
 ### Class Definitions
 
-*   Pattern: `\\bclass\\s+(\\w+)`
-*   Style: `theme.getLanguageSpecificStyle("ruby_class")`
+* `class MyClass`
 
 ### Method Declarations
 
-*   Pattern: `\\bdef\\s+(\\w+)\\s*\\(`
-*   Style: `theme.getLanguageSpecificStyle("ruby_method")`
+* `def my_method`
 
 ### Variables
 
-*   Pattern: `\\b(\\w+)\\s*=`
-*   Style: `theme.getLanguageSpecificStyle("ruby_variable")`
+* Assignments: `x = 5`
 
 ### Constants
 
-*   Pattern: `\\b[A-Z][A-Z0-9_]+\\b`
-*   Style: `theme.getLanguageSpecificStyle("ruby_constant")`
+* Uppercase constants: `MY_CONSTANT`
 
 ### Operators
 
-*   Pattern: `[+\\-*/=%&|^~<>!?]+`
-*   Style: `theme.getLanguageSpecificStyle("ruby_operator")`
+* Arithmetic operators: `+`, `-`, `*`, `/`, `%`, `**`
+* Comparison operators: `==`, `!=`, `===`, `<=>`, `>`, `<`, `>=` , `<=`
+* Logical operators: `&&`, `||`, `!`
+* Assignment operators: `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `**=`
 
 ### Brackets, Parentheses, and Braces
 
-*   Pattern: `[\\[\\]]`
-*   Style: `theme.getLanguageSpecificStyle("ruby_bracket")`
-*   Pattern: `[()]`
-*   Style: `theme.getLanguageSpecificStyle("ruby_parenthesis")`
-*   Pattern: `[{}]`
-*   Style: `theme.getLanguageSpecificStyle("ruby_brace")`
+* Brackets: `[`, `]`
+* Parentheses: `(`, `)`
+* Braces: `{`, `}`
 
 ### Method Parameters
 
-*   Pattern: `\\((\\s*\\w+\\s*:)`
-*   Style: `theme.getLanguageSpecificStyle("ruby_parameter")
+* Method parameters: `def my_method(x:)`
+
+### Local Variables
+
+* Assignments: `x = 5`
+
+### Global Variables
+
+* Global variables: `$global_variable`
+
+### Instance Variables
+
+* Instance variables: `@instance_variable`
+
+### Class Variables
+
+* Class variables: `@@class_variable`
