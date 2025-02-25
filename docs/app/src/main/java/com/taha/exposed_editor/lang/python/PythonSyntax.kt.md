@@ -1,101 +1,189 @@
-Python Syntax Highlighting
-==========================
+**Python Syntax Highlighting Documentation**
+=============================================
 
-Overview
---------
+**Overview**
+------------
 
-This code provides a set of functions and classes for syntax highlighting in Python programming language. It includes a `getPythonSyntaxPatterns` function that returns a list of syntax patterns for highlighting different elements of Python code, such as keywords, strings, comments, numbers, and more. Additionally, it includes a `PythonDefaultTheme` class that defines the default styles for each syntax pattern.
+This documentation provides an overview of the Python syntax highlighting code, including function descriptions, parameters, return values, usage examples, and API references.
 
-Function Descriptions
---------------------
+**Function Descriptions**
+------------------------
 
-### getPythonSyntaxPatterns
+### `getPythonSyntaxPatterns(theme: SyntaxHighlightingTheme)`
 
-*   Returns a list of `SyntaxPattern` objects that define the syntax patterns for highlighting Python code.
-*   Takes a `SyntaxHighlightingTheme` object as a parameter, which provides the styles for each syntax pattern.
+**Description**: Returns a list of syntax patterns for Python syntax highlighting.
 
-### PythonDefaultTheme
+**Parameters**:
 
-*   A class that defines the default styles for each syntax pattern in Python code.
-*   Implements the `SyntaxHighlightingTheme` interface.
+* `theme` (SyntaxHighlightingTheme): The theme to use for syntax highlighting.
 
-Method Descriptions
-------------------
+**Returns**: A list of SyntaxPattern objects.
 
-### getKeywordStyle
+**Throws**: None.
 
-*   Returns the style for keywords in Python code.
-*   Returns a `TextStyle` object with the color set to `#399bc5`.
-
-### getStringStyle
-
-*   Returns the style for strings in Python code.
-*   Returns a `TextStyle` object with the color set to `#007a09`.
-
-### getCommentStyle
-
-*   Returns the style for comments in Python code.
-*   Returns a `TextStyle` object with the color set to `#888888` and font weight set to `Light`.
-
-### getNumbersStyle
-
-*   Returns the style for numbers in Python code.
-*   Returns a `TextStyle` object with the color set to `#007a09`.
-
-### getDefaultTextStyle
-
-*   Returns the default style for text in Python code.
-*   Returns a `TextStyle` object with the color set to `#FFFFFF`.
-
-### getLanguageSpecificStyle
-
-*   Returns the style for a specific language element in Python code.
-*   Takes a string parameter representing the type of language element (e.g. "python_class", "python_function", etc.).
-*   Returns a `TextStyle` object with the style defined for the specified language element.
-
-Parameters and Return Values
------------------------------
-
-### getPythonSyntaxPatterns
-
-*   Parameters:
-    *   `theme`: a `SyntaxHighlightingTheme` object that provides the styles for each syntax pattern.
-*   Return value:
-    *   A list of `SyntaxPattern` objects that define the syntax patterns for highlighting Python code.
-
-### PythonDefaultTheme
-
-*   No parameters.
-*   Return value:
-    *   An instance of the `PythonDefaultTheme` class.
-
-Usage Examples
--------------
-
+**Example**:
 ```kotlin
-// Create an instance of the PythonDefaultTheme class
 val theme = PythonDefaultTheme()
-
-// Get the syntax patterns for Python code using the default theme
-val syntaxPatterns = getPythonSyntaxPatterns(theme)
-
-// Use the syntax patterns to highlight Python code
-// ...
+val patterns = getPythonSyntaxPatterns(theme)
 ```
 
+### `PythonDefaultTheme` Class
+
+**Description**: A default theme for Python syntax highlighting.
+
+**Properties**:
+
+* `keywordStyle` (TextStyle): The style for keywords.
+* `stringStyle` (TextStyle): The style for strings.
+* `commentStyle` (TextStyle): The style for comments.
+* `numbersStyle` (TextStyle): The style for numbers.
+* `defaultTextStyle` (TextStyle): The default text style.
+* `languageSpecificStyles` (Map<String, TextStyle>): A map of language-specific styles.
+
+**Methods**:
+
+* `getKeywordStyle()` (TextStyle): Returns the style for keywords.
+* `getStringStyle()` (TextStyle): Returns the style for strings.
+* `getCommentStyle()` (TextStyle): Returns the style for comments.
+* `getNumbersStyle()` (TextStyle): Returns the style for numbers.
+* `getDefaultTextStyle()` (TextStyle): Returns the default text style.
+* `getLanguageSpecificStyle(tokenType: String)` (TextStyle): Returns the language-specific style for the given token type.
+
+**API Reference**
+-----------------
+
+### `getPythonSyntaxPatterns(theme: SyntaxHighlightingTheme)`
+
+**Description**: Returns a list of syntax patterns for Python syntax highlighting.
+
+**Parameters**:
+
+* `theme` (SyntaxHighlightingTheme): The theme to use for syntax highlighting.
+
+**Returns**: A list of SyntaxPattern objects.
+
+**Throws**: None.
+
+**Example**:
 ```kotlin
-// Create a custom theme by subclassing the PythonDefaultTheme class
-class CustomTheme : PythonDefaultTheme() {
-    override fun getKeywordStyle() = TextStyle(color = Color(0xff0000ff))
-    // ...
-}
+val theme = PythonDefaultTheme()
+val patterns = getPythonSyntaxPatterns(theme)
+```
 
-// Create an instance of the custom theme
-val customTheme = CustomTheme()
+### `PythonDefaultTheme` Class
 
-// Get the syntax patterns for Python code using the custom theme
-val customSyntaxPatterns = getPythonSyntaxPatterns(customTheme)
+#### `getKeywordStyle()`
 
-// Use the custom syntax patterns to highlight Python code
-// ...
+**Description**: Returns the style for keywords.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val keywordStyle = theme.getKeywordStyle()
+```
+
+#### `getStringStyle()`
+
+**Description**: Returns the style for strings.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val stringStyle = theme.getStringStyle()
+```
+
+#### `getCommentStyle()`
+
+**Description**: Returns the style for comments.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val commentStyle = theme.getCommentStyle()
+```
+
+#### `getNumbersStyle()`
+
+**Description**: Returns the style for numbers.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val numbersStyle = theme.getNumbersStyle()
+```
+
+#### `getDefaultTextStyle()`
+
+**Description**: Returns the default text style.
+
+**Parameters**: None.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val defaultTextStyle = theme.getDefaultTextStyle()
+```
+
+#### `getLanguageSpecificStyle(tokenType: String)`
+
+**Description**: Returns the language-specific style for the given token type.
+
+**Parameters**:
+
+* `tokenType` (String): The token type.
+
+**Returns**: A TextStyle object.
+
+**Throws**: None.
+
+**Example**:
+```kotlin
+val theme = PythonDefaultTheme()
+val style = theme.getLanguageSpecificStyle("python_class")
+```
+
+### `SyntaxPattern` Class
+
+**Description**: A class representing a syntax pattern.
+
+**Properties**:
+
+* `regex` (Regex): The regular expression for the pattern.
+* `style` (TextStyle): The style for the pattern.
+
+**Methods**:
+
+* `SyntaxPattern(regex: Regex, style: TextStyle)` (Constructor): Creates a new SyntaxPattern object.
+
+**Example**:
+```kotlin
+val pattern = SyntaxPattern(Regex("\\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|raise|return|try|while|with|yield|True|False|None)\\b"), theme.getKeywordStyle())
 ```
