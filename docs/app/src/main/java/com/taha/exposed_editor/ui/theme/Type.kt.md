@@ -1,76 +1,58 @@
-# Typography Configuration
-=================================
-
-## Overview
+**Overview**
 -----------
 
-This code defines a set of Material typography styles for use in a Jetpack Compose application. It provides a basic configuration for text styles, including font family, weight, size, line height, and letter spacing.
+This Kotlin file defines a set of Material typography styles for a Jetpack Compose application. The `Typography` object provides a set of predefined text styles that can be used throughout the application to maintain a consistent visual design.
 
-## Typography Object
---------------------
+**Function Descriptions**
+------------------------
 
-### Description
+The code does not contain any functions. Instead, it defines a `Typography` object with various properties.
 
-The `Typography` object is a Material Design 3 typography configuration that provides a set of text styles to use throughout an application.
+**Properties and Values**
+-------------------------
 
-### Properties
+The `Typography` object has several properties, each representing a different text style. The code only defines the `bodyLarge` property, but other properties like `titleLarge` and `labelSmall` are commented out. Each property is assigned a `TextStyle` object with the following attributes:
 
-* `bodyLarge`: The default text style for large body text.
-* `titleLarge`, `labelSmall`, etc.: Optional text styles that can be uncommented and customized as needed.
+* `fontFamily`: The font family used for the text style.
+* `fontWeight`: The font weight used for the text style.
+* `fontSize`: The font size used for the text style.
+* `lineHeight`: The line height used for the text style.
+* `letterSpacing`: The letter spacing used for the text style.
 
-### Usage Example
+**Usage Examples**
+-----------------
 
-```kotlin
-import com.taha.exposed_editor.ui.theme.Typography
-
-// Use the Typography object in a Compose UI component
-@Composable
-fun MyText() {
-    Text(
-        text = "Hello, World!",
-        style = Typography.bodyLarge
-    )
-}
-```
-
-## TextStyle Object
-------------------
-
-### Description
-
-The `TextStyle` object represents a single text style configuration, including font family, weight, size, line height, and letter spacing.
-
-### Parameters
-
-* `fontFamily`: The font family to use for this text style. Defaults to `FontFamily.Default`.
-* `fontWeight`: The font weight to use for this text style. Defaults to `FontWeight.Normal`.
-* `fontSize`: The font size to use for this text style, in scaled pixels (sp).
-* `lineHeight`: The line height to use for this text style, in scaled pixels (sp).
-* `letterSpacing`: The letter spacing to use for this text style, in scaled pixels (sp).
-
-### Usage Example
+To use the `Typography` object in a Jetpack Compose application, you can access its properties like this:
 
 ```kotlin
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
-
-// Create a custom text style
-val myStyle = TextStyle(
-    fontFamily = FontFamily.SansSerif,
-    fontWeight = FontWeight.Bold,
-    fontSize = 18.sp,
-    lineHeight = 22.sp,
-    letterSpacing = 0.2.sp
+Text(
+    text = "Hello, World!",
+    style = Typography.bodyLarge
 )
-
-// Use the custom text style in a Compose UI component
-@Composable
-fun MyText() {
-    Text(
-        text = "Hello, World!",
-        style = myStyle
-    )
-}
 ```
+
+**API Reference**
+-----------------
+
+### `Typography`
+
+**Description**: A set of Material typography styles for a Jetpack Compose application.
+
+**Properties**:
+
+* `bodyLarge` (TextStyle): A text style for large body text.
+	+ `fontFamily` (FontFamily): The font family used for the text style. (Default: FontFamily.Default)
+	+ `fontWeight` (FontWeight): The font weight used for the text style. (Default: FontWeight.Normal)
+	+ `fontSize` (Float): The font size used for the text style. (Default: 16.sp)
+	+ `lineHeight` (Float): The line height used for the text style. (Default: 24.sp)
+	+ `letterSpacing` (Float): The letter spacing used for the text style. (Default: 0.5.sp)
+
+**Example**:
+```kotlin
+Text(
+    text = "Hello, World!",
+    style = Typography.bodyLarge
+)
+```
+
+Note that the `Typography` object does not have any methods or functions. It only provides a set of predefined text styles that can be used in a Jetpack Compose application.
