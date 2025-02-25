@@ -1,110 +1,104 @@
-**Syntax Highlighted Text Field Documentation**
-=====================================================
+# Syntax Highlighted Text Field
+================================
 
-Overview
---------
+The `SyntaxHighlightedTextField` is a composable function in Jetpack Compose that provides a text field with real-time syntax highlighting. It is designed to be used in code editors or other applications where syntax highlighting is desired.
 
-The `SyntaxHighlightedTextField` is a Composable function in Jetpack Compose that provides a text field with real-time syntax highlighting. It is designed to display and edit code in a variety of programming languages.
+## Function Description
+------------------------
 
-Function Description
---------------------
+### `SyntaxHighlightedTextField(code, patterns, backgroundColor, foregroundColor)`
 
-### `SyntaxHighlightedTextField`
+**Description**: A composable function that creates a text field with real-time syntax highlighting.
 
-This Composable function creates a text field that highlights syntax based on the provided patterns.
+**Parameters**:
 
-#### Parameters
+* `code` (String): The initial code to be displayed in the text field. Defaults to an empty string.
+* `patterns` (List<SyntaxPattern>): A list of syntax patterns to be used for highlighting.
+* `backgroundColor` (Color): The background color of the text field. Defaults to white.
+* `foregroundColor` (Color): The foreground color of the text field. Defaults to black.
 
-*   `code`: The initial code to be displayed in the text field. Defaults to an empty string.
-*   `patterns`: A list of `SyntaxPattern` objects that define the syntax highlighting rules.
-*   `backgroundColor`: The background color of the text field. Defaults to white.
-*   `foregroundColor`: The foreground color of the text field. Defaults to black.
+**Returns**: A composable function that renders a text field with syntax highlighting.
 
-#### Return Value
+**Throws**: None
 
-This function does not return any value. It is a Composable function that renders a UI component.
+**Example**:
+```kotlin
+@Composable
+fun MyCodeEditor() {
+    val patterns = listOf(
+        SyntaxPattern("keyword", "\\b(if|else|for|while)\\b".toRegex(), Color.Blue),
+        SyntaxPattern("string", "\".*\"".toRegex(), Color.Green)
+    )
+    
+    SyntaxHighlightedTextField(code = "if (true) { println(\"Hello World\") }", patterns = patterns)
+}
+```
 
-Usage Examples
---------------
+## API Reference
+-----------------
+
+### `SyntaxHighlightedTextField(code, patterns, backgroundColor, foregroundColor)`
+
+**Description**: A composable function that creates a text field with real-time syntax highlighting.
+
+**Parameters**:
+
+* `code` (String): The initial code to be displayed in the text field. Defaults to an empty string.
+* `patterns` (List<SyntaxPattern>): A list of syntax patterns to be used for highlighting.
+* `backgroundColor` (Color): The background color of the text field. Defaults to white.
+* `foregroundColor` (Color): The foreground color of the text field. Defaults to black.
+
+**Returns**: A composable function that renders a text field with syntax highlighting.
+
+**Throws**: None
+
+**Example**:
+```kotlin
+@Composable
+fun MyCodeEditor() {
+    val patterns = listOf(
+        SyntaxPattern("keyword", "\\b(if|else|for|while)\\b".toRegex(), Color.Blue),
+        SyntaxPattern("string", "\".*\"".toRegex(), Color.Green)
+    )
+    
+    SyntaxHighlightedTextField(code = "if (true) { println(\"Hello World\") }", patterns = patterns)
+}
+```
+
+## Usage Examples
+-----------------
 
 ### Basic Usage
 
 ```kotlin
 @Composable
-fun CodeEditor() {
+fun MyCodeEditor() {
+    val patterns = listOf(
+        SyntaxPattern("keyword", "\\b(if|else|for|while)\\b".toRegex(), Color.Blue),
+        SyntaxPattern("string", "\".*\"".toRegex(), Color.Green)
+    )
+    
+    SyntaxHighlightedTextField(code = "if (true) { println(\"Hello World\") }", patterns = patterns)
+}
+```
+
+### Custom Background and Foreground Colors
+
+```kotlin
+@Composable
+fun MyCodeEditor() {
+    val patterns = listOf(
+        SyntaxPattern("keyword", "\\b(if|else|for|while)\\b".toRegex(), Color.Blue),
+        SyntaxPattern("string", "\".*\"".toRegex(), Color.Green)
+    )
+    
     SyntaxHighlightedTextField(
-        code = "fun main() { println(\"Hello, World!\") }",
-        patterns = listOf(
-            SyntaxPattern("fun", Color.Blue),
-            SyntaxPattern("println", Color.Blue),
-            SyntaxPattern("\\(\".*\"\\)", Color.Green)
-        ),
+        code = "if (true) { println(\"Hello World\") }",
+        patterns = patterns,
         backgroundColor = Color.DarkGray,
         foregroundColor = Color.White
     )
 }
 ```
 
-### Customizing the Appearance
-
-You can customize the appearance of the text field by providing custom background and foreground colors.
-
-```kotlin
-@Composable
-fun CodeEditor() {
-    SyntaxHighlightedTextField(
-        code = "fun main() { println(\"Hello, World!\") }",
-        patterns = listOf(
-            SyntaxPattern("fun", Color.Blue),
-            SyntaxPattern("println", Color.Blue),
-            SyntaxPattern("\\(\".*\"\\)", Color.Green)
-        ),
-        backgroundColor = Color.DarkGray,
-        foregroundColor = Color.Cyan
-    )
-}
-```
-
-### Using System Theme
-
-You can use the system theme to automatically switch between light and dark modes.
-
-```kotlin
-@Composable
-fun CodeEditor() {
-    val isSystemInDarkTheme = isSystemInDarkTheme()
-    val backgroundColor = if (isSystemInDarkTheme) Color.DarkGray else Color.White
-    val foregroundColor = if (isSystemInDarkTheme) Color.White else Color.Black
-
-    SyntaxHighlightedTextField(
-        code = "fun main() { println(\"Hello, World!\") }",
-        patterns = listOf(
-            SyntaxPattern("fun", Color.Blue),
-            SyntaxPattern("println", Color.Blue),
-            SyntaxPattern("\\(\".*\"\\)", Color.Green)
-        ),
-        backgroundColor = backgroundColor,
-        foregroundColor = foregroundColor
-    )
-}
-```
-
-API Documentation
------------------
-
-### `SyntaxHighlightedTextField`
-
-```kotlin
-@Composable
-fun SyntaxHighlightedTextField(
-    code: String = "",
-    patterns: List<SyntaxPattern>,
-    backgroundColor: Color = Color.White,
-    foregroundColor: Color = Color.Black
-)
-```
-
-*   `code`: The initial code to be displayed in the text field.
-*   `patterns`: A list of `SyntaxPattern` objects that define the syntax highlighting rules.
-*   `backgroundColor`: The background color of the text field.
-*   `foregroundColor`: The foreground color of the text field.
+Note: The `SyntaxPattern` class is not included in this documentation as it is assumed to be a separate entity that defines a syntax pattern for highlighting.
